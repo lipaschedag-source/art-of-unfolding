@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Art of Unfolding · Lisa</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F2EDE4;
+    --bark: #3D2E22;
+    --moss: #7A8C6E;
+    --sand: #C9B99A;
+    --dusk: #9C8C7A;
+    --white: #FAF8F4;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--bark);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.4rem 4rem;
+    background: transparent;
+    mix-blend-mode: normal;
+  }
+
+  nav.scrolled {
+    background: rgba(242,237,228,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--sand);
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--bark);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--bark);
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.75;
+    transition: opacity 0.2s;
+  }
+
+  .nav-links a:hover { opacity: 1; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 4rem 6rem;
+    position: relative;
+    overflow: hidden;
+    background: var(--bark);
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse at 70% 40%, rgba(122,140,110,0.25) 0%, transparent 60%),
+      radial-gradient(ellipse at 20% 80%, rgba(201,185,154,0.15) 0%, transparent 50%);
+  }
+
+  /* Botanical SVG decoration */
+  .hero-botanical {
+    position: absolute;
+    top: 0; right: 0;
+    width: 55%;
+    height: 100%;
+    opacity: 0.38;
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sand);
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 7vw, 6.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--cream);
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+  }
+
+  .hero-headline em {
+    font-style: italic;
+    color: var(--sand);
+  }
+
+  .hero-sub {
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--dusk);
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-sub span { margin: 0 0.8rem; opacity: 0.4; }
+
+  .hero-cta {
+    margin-top: 3rem;
+    position: relative;
+    z-index: 2;
+    display: inline-block;
+    padding: 0.9rem 2.5rem;
+    border: 1px solid var(--sand);
+    color: var(--cream);
+    text-decoration: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  .hero-cta:hover {
+    background: var(--sand);
+    color: var(--bark);
+  }
+
+  /* SECTIONS */
+  section { padding: 7rem 4rem; }
+
+  .section-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--moss);
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 300;
+    line-height: 1.2;
+    max-width: 600px;
+  }
+
+  .section-title em { font-style: italic; }
+
+  /* ÜBER */
+  .about {
+    background: var(--white);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .about-image {
+    aspect-ratio: 3/4;
+    background: var(--sand);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .about-image-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: var(--bark);
+    opacity: 0.4;
+    letter-spacing: 0.1em;
+  }
+
+  /* Signature line element */
+  .about-image::after {
+    content: '';
+    position: absolute;
+    bottom: -2rem;
+    right: -2rem;
+    width: 120px;
+    height: 120px;
+    border: 1px solid var(--sand);
+    border-radius: 50%;
+  }
+
+  .about-text p {
+    margin-top: 1.8rem;
+    color: var(--dusk);
+    max-width: 480px;
+    font-size: 1.05rem;
+  }
+
+  .about-credentials {
+    margin-top: 2.5rem;
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .credential {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--bark);
+    border-bottom: 1px solid var(--sand);
+    padding-bottom: 0.3rem;
+  }
+
+  /* ANGEBOTE */
+  .offerings {
+    background: var(--cream);
+  }
+
+  .offerings-grid {
+    margin-top: 4rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .offering-card {
+    background: var(--white);
+    padding: 3rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+
+  .offering-card:hover { background: var(--bark); }
+  .offering-card:hover .offering-title,
+  .offering-card:hover .offering-desc,
+  .offering-card:hover .offering-nr { color: var(--cream); }
+  .offering-card:hover .offering-list li { color: var(--sand); }
+  .offering-card:hover .offering-link { color: var(--sand); border-color: var(--sand); }
+
+  .offering-nr {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem;
+    font-weight: 300;
+    color: var(--sand);
+    line-height: 1;
+    margin-bottom: 1.5rem;
+    transition: color 0.3s;
+  }
+
+  .offering-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    transition: color 0.3s;
+  }
+
+  .offering-desc {
+    font-size: 0.88rem;
+    color: var(--dusk);
+    margin-bottom: 1.5rem;
+    transition: color 0.3s;
+  }
+
+  .offering-list {
+    list-style: none;
+    margin-bottom: 2rem;
+  }
+
+  .offering-list li {
+    font-size: 0.82rem;
+    color: var(--dusk);
+    padding: 0.35rem 0;
+    border-bottom: 1px solid rgba(201,185,154,0.3);
+    transition: color 0.3s;
+  }
+
+  .offering-list li::before {
+    content: '⟡ ';
+    opacity: 0.6;
+  }
+
+  .offering-link {
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--bark);
+    text-decoration: none;
+    border-bottom: 1px solid var(--bark);
+    padding-bottom: 0.2rem;
+    transition: color 0.3s, border-color 0.3s;
+  }
+
+  /* PHILOSOPHIE */
+  .philosophy {
+    background: var(--bark);
+    color: var(--cream);
+    text-align: center;
+  }
+
+  .philosophy .section-label { color: var(--moss); }
+
+  .philosophy .section-title {
+    color: var(--cream);
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .philosophy-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.4rem, 3vw, 2.2rem);
+    font-style: italic;
+    font-weight: 300;
+    color: var(--sand);
+    max-width: 700px;
+    margin: 3rem auto 0;
+    line-height: 1.5;
+  }
+
+  .philosophy-pillars {
+    margin-top: 5rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .pillar-symbol {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    opacity: 0.7;
+  }
+
+  .pillar-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    color: var(--sand);
+  }
+
+  .pillar-desc {
+    font-size: 0.83rem;
+    color: var(--dusk);
+    line-height: 1.6;
+  }
+
+  /* TESTIMONIALS */
+  .testimonials {
+    background: var(--white);
+  }
+
+  .testimonials-grid {
+    margin-top: 4rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+  }
+
+  .testimonial {
+    border-left: 1px solid var(--sand);
+    padding-left: 2rem;
+  }
+
+  .testimonial-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-style: italic;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    color: var(--bark);
+  }
+
+  .testimonial-name {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--dusk);
+  }
+
+  /* KONTAKT */
+  .contact {
+    background: var(--cream);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: start;
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .form-group label {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--dusk);
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--sand);
+    padding: 0.6rem 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    color: var(--bark);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus { border-color: var(--bark); }
+
+  .form-group textarea { resize: none; height: 100px; }
+
+  .form-submit {
+    margin-top: 0.5rem;
+    padding: 0.9rem 2.5rem;
+    background: var(--bark);
+    color: var(--cream);
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    align-self: flex-start;
+    transition: background 0.3s;
+  }
+
+  .form-submit:hover { background: var(--moss); }
+
+  .contact-info p {
+    margin-top: 1.8rem;
+    color: var(--dusk);
+    font-size: 1rem;
+    max-width: 400px;
+  }
+
+  .contact-details {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .contact-detail {
+    display: flex;
+    gap: 1rem;
+    align-items: baseline;
+  }
+
+  .contact-detail-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--moss);
+    min-width: 90px;
+  }
+
+  .contact-detail-value {
+    font-size: 0.9rem;
+    color: var(--bark);
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--bark);
+    padding: 3rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--sand);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .footer-links a {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--dusk);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--cream); }
+
+  .footer-copy {
+    font-size: 0.72rem;
+    color: var(--dusk);
+    opacity: 0.6;
+  }
+
+  /* DIVIDER */
+  .divider {
+    width: 40px;
+    height: 1px;
+    background: var(--sand);
+    margin: 2rem 0;
+  }
+
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 2rem; }
+    section { padding: 5rem 2rem; }
+    .hero { padding: 0 2rem 4rem; }
+    .about, .contact { grid-template-columns: 1fr; gap: 3rem; }
+    .offerings-grid { grid-template-columns: 1fr; }
+    .philosophy-pillars { grid-template-columns: 1fr; gap: 2rem; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; align-items: flex-start; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">Art of Unfolding</a>
+  <ul class="nav-links">
+    <li><a href="#about">Lisa</a></li>
+    <li><a href="#offerings">Angebote</a></li>
+    <li><a href="#philosophy">Philosophie</a></li>
+    <li><a href="#contact">Kontakt</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <svg class="hero-botanical" viewBox="0 0 500 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Main stem -->
+    <path d="M250 750 Q240 600 250 400 Q260 200 245 50" stroke="#C9B99A" stroke-width="1.2"/>
+    <!-- Large outer leaves -->
+    <path d="M250 400 Q150 320 80 280 Q160 340 250 400" stroke="#C9B99A" stroke-width="0.8" fill="none"/>
+    <path d="M250 400 Q350 320 420 280 Q340 340 250 400" stroke="#C9B99A" stroke-width="0.8" fill="none"/>
+    <path d="M250 500 Q130 420 60 370 Q150 440 250 500" stroke="#7A8C6E" stroke-width="0.8" fill="none"/>
+    <path d="M250 500 Q370 420 440 370 Q350 440 250 500" stroke="#7A8C6E" stroke-width="0.8" fill="none"/>
+    <path d="M250 300 Q170 230 110 190 Q180 250 250 300" stroke="#C9B99A" stroke-width="0.7" fill="none"/>
+    <path d="M250 300 Q330 230 390 190 Q320 250 250 300" stroke="#C9B99A" stroke-width="0.7" fill="none"/>
+    <!-- Small accent leaves -->
+    <path d="M250 200 Q210 160 185 140 Q220 170 250 200" stroke="#7A8C6E" stroke-width="0.6" fill="none"/>
+    <path d="M250 200 Q290 160 315 140 Q280 170 250 200" stroke="#7A8C6E" stroke-width="0.6" fill="none"/>
+    <path d="M250 600 Q200 560 170 540 Q210 570 250 600" stroke="#C9B99A" stroke-width="0.6" fill="none"/>
+    <path d="M250 600 Q300 560 330 540 Q290 570 250 600" stroke="#C9B99A" stroke-width="0.6" fill="none"/>
+    <!-- Leaf veins -->
+    <path d="M250 400 Q200 360 160 340" stroke="#C9B99A" stroke-width="0.3" stroke-dasharray="2,4"/>
+    <path d="M250 400 Q300 360 340 340" stroke="#C9B99A" stroke-width="0.3" stroke-dasharray="2,4"/>
+    <!-- Moon circle top -->
+    <circle cx="250" cy="100" r="55" stroke="#C9B99A" stroke-width="0.8"/>
+    <circle cx="250" cy="100" r="38" stroke="#C9B99A" stroke-width="0.4"/>
+    <circle cx="250" cy="100" r="18" stroke="#7A8C6E" stroke-width="0.6"/>
+    <!-- Dots -->
+    <circle cx="250" cy="100" r="3" fill="#C9B99A"/>
+    <circle cx="80" cy="280" r="2" fill="#C9B99A" opacity="0.6"/>
+    <circle cx="420" cy="280" r="2" fill="#C9B99A" opacity="0.6"/>
+    <circle cx="60" cy="370" r="2" fill="#7A8C6E" opacity="0.6"/>
+    <circle cx="440" cy="370" r="2" fill="#7A8C6E" opacity="0.6"/>
+    <!-- Bottom roots -->
+    <path d="M250 750 Q220 780 190 800" stroke="#C9B99A" stroke-width="0.6" opacity="0.5"/>
+    <path d="M250 750 Q250 785 250 810" stroke="#C9B99A" stroke-width="0.6" opacity="0.5"/>
+    <path d="M250 750 Q280 780 310 800" stroke="#C9B99A" stroke-width="0.6" opacity="0.5"/>
+    <!-- Floating particles -->
+    <circle cx="140" cy="180" r="1.5" fill="#C9B99A" opacity="0.5"/>
+    <circle cx="360" cy="220" r="1.5" fill="#C9B99A" opacity="0.5"/>
+    <circle cx="120" cy="460" r="1" fill="#7A8C6E" opacity="0.5"/>
+    <circle cx="390" cy="480" r="1" fill="#7A8C6E" opacity="0.5"/>
+    <circle cx="180" cy="650" r="1.5" fill="#C9B99A" opacity="0.4"/>
+    <circle cx="320" cy="680" r="1" fill="#C9B99A" opacity="0.4"/>
+  </svg>
+
+  <p class="hero-eyebrow">Yoga · Coaching · Corporate — Münster</p>
+  <h1 class="hero-headline">
+    unroll your mat.<br>
+    <em>unfold your potential.</em>
+  </h1>
+  <p class="hero-sub">
+    im Außen performen<span>·</span>im Inneren ankommen
+  </p>
+  <a href="#offerings" class="hero-cta">Angebote entdecken</a>
+</section>
+
+<!-- ÜBER -->
+<section class="about" id="about">
+  <div class="about-image">
+    <div class="about-image-placeholder">Lisa · Foto</div>
+  </div>
+  <div class="about-text">
+    <p class="section-label">Über Lisa</p>
+    <h2 class="section-title">Yoga ist nicht<br>was ich tue —<br><em>es ist wie ich lebe.</em></h2>
+    <div class="divider"></div>
+    <p>Ich bin Lisa — Yoga-Lehrerin, Coach und die Person hinter Art of Unfolding. Meine Überzeugung: wer im Körper zuhause ist, performt klarer, führt bewusster und lebt voller.</p>
+    <p>Ob auf der Matte oder im Gespräch — ich begleite Menschen und Teams dabei, ihr Potenzial von innen heraus zu entfalten.</p>
+    <div class="about-credentials">
+      <span class="credential">400h Ashtanga Vinyasa</span>
+      <span class="credential">Goodwill Career Coach</span>
+      <span class="credential">NLP Practitioner</span>
+      <span class="credential">Trainer-Lizenz</span>
+    </div>
+  </div>
+</section>
+
+<!-- ANGEBOTE -->
+<section class="offerings" id="offerings">
+  <p class="section-label">Angebote</p>
+  <h2 class="section-title">Drei Wege,<br><em>ein Ziel.</em></h2>
+  <div class="offerings-grid">
+
+    <div class="offering-card">
+      <div class="offering-nr">01</div>
+      <h3 class="offering-title">Yoga-Klassen</h3>
+      <p class="offering-desc">Ashtanga & Vinyasa — für Anfänger bis Fortgeschrittene. Öffentlich, privat oder auf Anfrage.</p>
+      <ul class="offering-list">
+        <li>Ashtanga Mysore Style</li>
+        <li>Vinyasa Flow</li>
+        <li>1:1 Privatstunden</li>
+        <li>Workshops & Intensives</li>
+      </ul>
+      <a href="#contact" class="offering-link">Mehr erfahren</a>
+    </div>
+
+    <div class="offering-card">
+      <div class="offering-nr">02</div>
+      <h3 class="offering-title">1:1 Coaching</h3>
+      <p class="offering-desc">Karriere, Life Design & persönliche Entwicklung — für Menschen die mehr wollen als Funktionieren.</p>
+      <ul class="offering-list">
+        <li>Karriere & New Work</li>
+        <li>Life Design</li>
+        <li>Potenzialentfaltung</li>
+        <li>NLP-basierte Methoden</li>
+      </ul>
+      <a href="#contact" class="offering-link">Mehr erfahren</a>
+    </div>
+
+    <div class="offering-card">
+      <div class="offering-nr">03</div>
+      <h3 class="offering-title">Corporate Yoga</h3>
+      <p class="offering-desc">Yoga & Achtsamkeit für Teams — als Einzel-Session, Kurs oder Retreat-Format.</p>
+      <ul class="offering-list">
+        <li>Team-Yoga (on-site & online)</li>
+        <li>Mindfulness Workshops</li>
+        <li>Retreats & Offsites</li>
+        <li>BGM-zertifizierbar</li>
+      </ul>
+      <a href="#contact" class="offering-link">Anfrage stellen</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- PHILOSOPHIE -->
+<section class="philosophy" id="philosophy">
+  <p class="section-label">Philosophie</p>
+  <h2 class="section-title" style="color: var(--cream);">feel as good<br><em>as you perform.</em></h2>
+  <p class="philosophy-quote">
+    „Stärke entsteht nicht trotz Stille — sie entsteht aus ihr."
+  </p>
+  <div class="philosophy-pillars" style="margin-top: 5rem;">
+    <div>
+      <div class="pillar-symbol">⟡</div>
+      <div class="pillar-name">Körper</div>
+      <p class="pillar-desc">Der Körper ist kein Werkzeug. Er ist das Medium — für Klarheit, Präsenz und echte Stärke.</p>
+    </div>
+    <div>
+      <div class="pillar-symbol">꩜</div>
+      <div class="pillar-name">Geist</div>
+      <p class="pillar-desc">Mentale Klarheit entsteht, wenn wir aufhören zu kämpfen — und anfangen zuzuhören.</p>
+    </div>
+    <div>
+      <div class="pillar-symbol">✦</div>
+      <div class="pillar-name">Potenzial</div>
+      <p class="pillar-desc">Unfolding bedeutet: nicht mehr werden — sondern endlich sein, wer du schon bist.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <p class="section-label">Stimmen</p>
+  <h2 class="section-title">Was andere<br><em>erlebt haben.</em></h2>
+  <div class="testimonials-grid">
+    <div class="testimonial">
+      <p class="testimonial-text">„Lisa schafft einen Raum, in dem man sich gleichzeitig herausgefordert und getragen fühlt. Nach dem Kurs war ich nicht nur körperlich stärker — ich hatte wieder Zugang zu mir selbst."</p>
+      <p class="testimonial-name">— Sarah K., Führungskraft, Münster</p>
+    </div>
+    <div class="testimonial">
+      <p class="testimonial-text">„Die Corporate-Sessions haben unser Team wirklich zusammengebracht. Kein Wellness-Pflichtprogramm — sondern echte Wirkung. Wir buchen wieder."</p>
+      <p class="testimonial-name">— Marcus T., Team Lead, Tech-Startup</p>
+    </div>
+    <div class="testimonial">
+      <p class="testimonial-text">„Im Coaching mit Lisa habe ich Antworten gefunden, die ich schon lange gesucht hatte. Ihre Kombination aus Körperarbeit und Gesprächstiefe ist einzigartig."</p>
+      <p class="testimonial-name">— Julia M., Coach & Unternehmerin</p>
+    </div>
+    <div class="testimonial">
+      <p class="testimonial-text">„Ich kam wegen Ashtanga — und blieb wegen allem anderen. Lisa unterrichtet mit einer Präzision und Wärme, die man selten findet."</p>
+      <p class="testimonial-name">— Tom R., Ashtanga-Praktizierender</p>
+    </div>
+  </div>
+</section>
+
+<!-- KONTAKT -->
+<section class="contact" id="contact">
+  <div class="contact-info">
+    <p class="section-label">Kontakt</p>
+    <h2 class="section-title">Lass uns<br><em>gemeinsam anfangen.</em></h2>
+    <div class="divider"></div>
+    <p>Ob Yoga-Klasse, Coaching-Anfrage oder Corporate-Buchung — ich freue mich von dir zu hören.</p>
+    <div class="contact-details">
+      <div class="contact-detail">
+        <span class="contact-detail-label">Instagram</span>
+        <span class="contact-detail-value">@art.of.unfolding</span>
+      </div>
+      <div class="contact-detail">
+        <span class="contact-detail-label">Web</span>
+        <span class="contact-detail-value">art-of-unfolding.de</span>
+      </div>
+      <div class="contact-detail">
+        <span class="contact-detail-label">Standort</span>
+        <span class="contact-detail-value">Münster, Deutschland</span>
+      </div>
+    </div>
+  </div>
+  <div class="contact-form">
+    <div class="form-group">
+      <label>Name</label>
+      <input type="text" placeholder="Dein Name">
+    </div>
+    <div class="form-group">
+      <label>E-Mail</label>
+      <input type="email" placeholder="deine@email.de">
+    </div>
+    <div class="form-group">
+      <label>Ich interessiere mich für</label>
+      <select>
+        <option value="">— Bitte wählen —</option>
+        <option>Yoga-Klassen</option>
+        <option>1:1 Coaching</option>
+        <option>Corporate Yoga</option>
+        <option>Sonstiges</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Nachricht</label>
+      <textarea placeholder="Erzähl mir von dir oder deinem Team..."></textarea>
+    </div>
+    <button class="form-submit">Nachricht senden</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">Art of Unfolding · Lisa</span>
+  <ul class="footer-links">
+    <li><a href="#">Instagram</a></li>
+    <li><a href="#">Impressum</a></li>
+    <li><a href="#">Datenschutz</a></li>
+  </ul>
+  <span class="footer-copy">© 2026 Lisa · Art of Unfolding · Münster</span>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+</script>
+
+</body>
+</html>
