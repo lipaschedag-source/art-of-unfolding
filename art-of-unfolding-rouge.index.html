@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Art of Unfolding · Lisa Paschedag · Yoga · Coaching · Corporate · Münster</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --cream:  #F6F5ED;
+  --bark:   #3D2E22;
+  --bark2:  #2E2218;
+  --moss:   #8C5A54;
+  --sand:   #9A8C7C;
+  --dusk:   #B8A898;
+  --white:  #FAF8F2;
+  --line:   rgba(154,140,124,0.18);
+  --f-serif: 'Lora', Georgia, serif;
+  --f-sans:  'Barlow', system-ui, sans-serif;
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+}
+html { scroll-behavior: smooth; }
+body { background: var(--cream); color: var(--bark); font-family: var(--f-sans); font-weight: 300; font-size: 16px; line-height: 1.75; -webkit-font-smoothing: antialiased; }
+a { text-decoration: none; color: inherit; }
+.label { font-family: var(--f-sans); font-size: 0.65rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--moss); }
+.divider { width: 36px; height: 1px; background: var(--sand); margin: 1.8rem 0; }
+
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; justify-content: space-between; align-items: center; padding: 1.4rem 5vw; transition: background 0.4s var(--ease), border-color 0.4s var(--ease); border-bottom: 1px solid transparent; }
+nav.scrolled { background: rgba(246,245,237,0.96); backdrop-filter: blur(12px); border-color: var(--line); }
+.nav-logo { font-family: var(--f-serif); font-size: 0.95rem; font-weight: 400; letter-spacing: 0.16em; text-transform: uppercase; color: var(--bark); }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a { font-family: var(--f-sans); font-size: 0.7rem; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase; color: var(--bark); opacity: 0.5; transition: opacity 0.2s; }
+.nav-links a:hover { opacity: 1; }
+.nav-cta { font-family: var(--f-sans); font-size: 0.65rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.5rem 1.3rem; border: 1px solid var(--bark); color: var(--bark); transition: background 0.25s, color 0.25s; }
+.nav-cta:hover { background: var(--bark); color: var(--cream); }
+
+.hero { min-height: 100vh; background: var(--bark2); display: grid; grid-template-rows: 1fr auto; padding: 0 5vw; position: relative; overflow: hidden; }
+.hero-rule { position: absolute; top: 50%; left: 0; right: 0; height: 1px; background: var(--line); pointer-events: none; }
+.hero-inner { display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 5rem; padding-top: 12rem; position: relative; z-index: 2; max-width: 900px; }
+.hero-eyebrow { font-family: var(--f-sans); font-size: 0.65rem; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase; color: var(--moss); margin-bottom: 1.8rem; }
+.hero-h1 { font-family: var(--f-serif); font-size: clamp(3rem, 7vw, 6.5rem); font-weight: 300; line-height: 1.08; color: var(--cream); margin-bottom: 2rem; }
+.hero-h1 em { font-style: italic; color: var(--sand); }
+.hero-claim { font-family: var(--f-sans); font-size: 0.88rem; font-weight: 300; color: var(--dusk); margin-bottom: 3rem; max-width: 520px; line-height: 1.85; }
+.hero-actions { display: flex; gap: 1.2rem; align-items: center; flex-wrap: wrap; }
+.btn-primary { display: inline-block; padding: 0.85rem 2.2rem; background: var(--sand); color: var(--cream); font-family: var(--f-sans); font-size: 0.68rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; transition: background 0.25s; }
+.btn-primary:hover { background: var(--moss); }
+.btn-ghost { display: inline-block; font-family: var(--f-sans); font-size: 0.68rem; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase; color: var(--dusk); border-bottom: 1px solid rgba(184,168,152,0.4); padding-bottom: 0.15rem; transition: color 0.2s; }
+.btn-ghost:hover { color: var(--cream); }
+.hero-bottom { display: flex; justify-content: space-between; align-items: flex-end; padding: 2rem 0; border-top: 1px solid var(--line); position: relative; z-index: 2; }
+.hero-stats { display: flex; gap: 3rem; }
+.hero-stat-nr { font-family: var(--f-serif); font-size: 1.8rem; font-weight: 400; color: var(--sand); line-height: 1; margin-bottom: 0.2rem; }
+.hero-stat-label { font-family: var(--f-sans); font-size: 0.58rem; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase; color: var(--dusk); }
+.hero-scroll { font-family: var(--f-sans); font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--dusk); display: flex; align-items: center; gap: 0.8rem; }
+.hero-scroll::before { content: ''; display: block; width: 1px; height: 40px; background: var(--dusk); opacity: 0.4; }
+
+.about { padding: 9rem 5vw; background: var(--white); display: grid; grid-template-columns: 1fr 1fr; gap: 8vw; align-items: start; }
+.about-image-wrap { position: relative; }
+.about-image { aspect-ratio: 4/5; overflow: hidden; position: relative; background: linear-gradient(135deg, #c6b49a 0%, #9a8c7c 100%); }
+.about-image-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-family: var(--f-serif); font-size: 0.9rem; letter-spacing: 0.1em; color: var(--bark); opacity: 0.35; }
+.about-image-wrap::after { content: ''; position: absolute; bottom: -1.5rem; right: -1.5rem; width: calc(100% - 3rem); height: calc(100% - 3rem); border: 1px solid var(--sand); z-index: -1; }
+.about-text h2 { font-family: var(--f-serif); font-size: clamp(1.8rem, 3.2vw, 2.8rem); font-weight: 300; line-height: 1.2; margin-top: 1rem; }
+.about-text h2 em { font-style: italic; }
+.about-text p { margin-top: 1.2rem; font-family: var(--f-sans); font-size: 0.92rem; font-weight: 300; color: var(--sand); line-height: 1.85; }
+.quote-block { margin: 2rem 0; padding: 1.4rem 1.8rem; border-left: 2px solid var(--sand); background: rgba(154,140,124,0.05); }
+.quote-block p { font-family: var(--f-serif); font-size: 1.15rem; font-style: italic; font-weight: 300; color: var(--bark); line-height: 1.5; margin-top: 0 !important; }
+.link-row { margin-top: 2rem; display: flex; gap: 1.5rem; flex-wrap: wrap; }
+.link-row a { font-family: var(--f-sans); font-size: 0.65rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--bark); border-bottom: 1px solid var(--sand); padding-bottom: 0.15rem; transition: color 0.2s; }
+.link-row a:hover { color: var(--moss); }
+
+.offerings { padding: 9rem 5vw; background: var(--cream); }
+.offerings-header { margin-bottom: 1rem; }
+.offerings-header h2 { font-family: var(--f-serif); font-size: clamp(1.8rem, 3.2vw, 2.8rem); font-weight: 300; line-height: 1.2; margin-top: 0.5rem; }
+.offerings-header h2 em { font-style: italic; }
+.offerings-subclaim { font-family: var(--f-sans); font-size: 0.88rem; font-weight: 300; color: var(--sand); margin-bottom: 3rem; margin-top: 0.8rem; }
+.offerings-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); }
+.offering { background: var(--white); padding: 3rem 2.5rem 2.5rem; display: flex; flex-direction: column; transition: background 0.35s var(--ease); cursor: default; }
+.offering:hover { background: var(--bark); }
+.offering:hover .offering-nr, .offering:hover .offering-name, .offering:hover .offering-desc { color: var(--cream); }
+.offering:hover .offering-list li { color: var(--dusk); border-color: rgba(154,140,124,0.15); }
+.offering:hover .offering-cta { color: var(--sand); border-color: var(--sand); }
+.offering-nr { font-family: var(--f-serif); font-size: 2.8rem; font-weight: 300; color: rgba(154,140,124,0.25); line-height: 1; margin-bottom: 1.5rem; transition: color 0.35s; }
+.offering-name { font-family: var(--f-serif); font-size: 1.6rem; font-weight: 300; line-height: 1.2; color: var(--bark); margin-bottom: 1rem; transition: color 0.35s; }
+.offering-name em { font-style: italic; }
+.offering-desc { font-family: var(--f-sans); font-size: 0.82rem; font-weight: 300; color: var(--sand); line-height: 1.75; margin-bottom: 1.8rem; transition: color 0.35s; flex: 1; }
+.offering-list { list-style: none; margin-bottom: 2rem; }
+.offering-list li { font-family: var(--f-sans); font-size: 0.75rem; font-weight: 300; color: var(--sand); padding: 0.5rem 0; border-bottom: 1px solid var(--line); transition: color 0.35s, border-color 0.35s; display: flex; gap: 0.6rem; }
+.offering-list li::before { content: '✦'; font-size: 0.5rem; opacity: 0.5; flex-shrink: 0; margin-top: 0.25rem; }
+.offering-cta { font-family: var(--f-sans); font-size: 0.65rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--bark); border-bottom: 1px solid var(--bark); padding-bottom: 0.2rem; align-self: flex-start; transition: color 0.35s, border-color 0.35s; }
+
+.journey { padding: 9rem 5vw; background: var(--bark); }
+.journey-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 6vw; align-items: start; }
+.journey h2 { font-family: var(--f-serif); font-size: clamp(1.8rem, 3.2vw, 2.8rem); font-weight: 300; line-height: 1.2; color: var(--cream); margin-top: 1rem; }
+.journey h2 em { font-style: italic; color: var(--sand); }
+.journey-text p { margin-top: 1.4rem; font-family: var(--f-sans); font-size: 0.9rem; font-weight: 300; color: var(--dusk); line-height: 1.85; }
+.journey-intro { font-family: var(--f-sans); font-size: 0.85rem; font-weight: 300; font-style: italic; color: var(--dusk); line-height: 1.75; border-bottom: 1px solid var(--line); padding-bottom: 1.2rem; }
+.journey-steps { display: flex; flex-direction: column; }
+.journey-step { display: flex; gap: 1.5rem; padding: 1.5rem 0; border-bottom: 1px solid var(--line); }
+.journey-step:first-child { border-top: 1px solid var(--line); }
+.journey-step-nr { font-size: 1rem; color: var(--moss); opacity: 0.7; line-height: 1.4; min-width: 1.5rem; flex-shrink: 0; }
+.journey-step-title { font-family: var(--f-sans); font-size: 0.82rem; font-weight: 500; color: var(--cream); margin-bottom: 0.3rem; }
+.journey-step-desc { font-family: var(--f-sans); font-size: 0.78rem; font-weight: 300; color: var(--dusk); line-height: 1.65; }
+
+.credentials { display: flex; flex-direction: column; }
+.credential-row { display: flex; align-items: center; gap: 1rem; padding: 0.7rem 0; border-bottom: 1px solid var(--line); }
+.credential-row:first-child { border-top: 1px solid var(--line); }
+.credential-icon { font-size: 0.7rem; color: var(--moss); width: 1rem; text-align: center; }
+.credential-text { font-family: var(--f-sans); font-size: 0.8rem; font-weight: 300; color: var(--cream); }
+
+.philosophy { padding: 9rem 5vw; background: var(--bark2); text-align: center; }
+.philosophy-claim { font-family: var(--f-serif); font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 300; line-height: 1.1; color: var(--cream); margin-top: 1rem; margin-bottom: 3rem; }
+.philosophy-claim em { font-style: italic; color: var(--sand); }
+.philosophy-body { max-width: 680px; margin: 0 auto 5rem; }
+.philosophy-body p { font-family: var(--f-sans); font-size: 0.92rem; font-weight: 300; color: var(--dusk); line-height: 1.85; margin-top: 1.2rem; }
+.philosophy-pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); max-width: 900px; margin: 0 auto; text-align: left; }
+.pillar { background: var(--bark2); padding: 2.5rem 2rem; }
+.pillar-symbol { font-size: 1.4rem; color: var(--sand); opacity: 0.5; margin-bottom: 1rem; }
+.pillar-name { font-family: var(--f-serif); font-size: 1.3rem; font-weight: 300; color: var(--cream); margin-bottom: 0.8rem; line-height: 1.2; }
+.pillar-desc { font-family: var(--f-sans); font-size: 0.8rem; font-weight: 300; color: var(--dusk); line-height: 1.75; }
+
+.testimonials { padding: 9rem 5vw; background: var(--white); }
+.testimonials h2 { font-family: var(--f-serif); font-size: clamp(1.8rem, 3.2vw, 2.8rem); font-weight: 300; line-height: 1.2; margin-top: 1rem; margin-bottom: 4rem; max-width: 500px; }
+.testimonials h2 em { font-style: italic; }
+.testimonials-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); }
+.testimonial { background: var(--white); padding: 3rem 2.8rem; }
+.testimonial-text { font-family: var(--f-serif); font-size: 1.1rem; font-style: italic; font-weight: 300; line-height: 1.7; color: var(--bark); margin-bottom: 1.5rem; }
+.testimonial-meta { font-family: var(--f-sans); font-size: 0.68rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dusk); }
+
+.contact { padding: 9rem 5vw; background: var(--bark); display: grid; grid-template-columns: 1fr 1fr; gap: 8vw; align-items: start; }
+.contact-info h2 { font-family: var(--f-serif); font-size: clamp(1.8rem, 3.2vw, 2.8rem); font-weight: 300; line-height: 1.2; color: var(--cream); margin-top: 1rem; }
+.contact-info h2 em { font-style: italic; color: var(--sand); }
+.contact-info p { margin-top: 1.6rem; font-family: var(--f-sans); font-size: 0.9rem; font-weight: 300; color: var(--dusk); max-width: 380px; line-height: 1.85; }
+.contact-details { margin-top: 3rem; display: flex; flex-direction: column; }
+.contact-row { display: flex; gap: 2rem; padding: 0.9rem 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+.contact-row:first-child { border-top: 1px solid var(--line); }
+.contact-key { font-family: var(--f-sans); font-size: 0.62rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--moss); min-width: 80px; }
+.contact-val { font-family: var(--f-sans); font-size: 0.85rem; font-weight: 300; color: var(--sand); }
+.contact-form { display: flex; flex-direction: column; gap: 2rem; }
+.form-field { display: flex; flex-direction: column; gap: 0.5rem; }
+.form-field label { font-family: var(--f-sans); font-size: 0.62rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--dusk); }
+.form-field input, .form-field textarea, .form-field select { background: transparent; border: none; border-bottom: 1px solid rgba(154,140,124,0.25); padding: 0.6rem 0; font-family: var(--f-sans); font-size: 0.9rem; font-weight: 300; color: var(--cream); outline: none; transition: border-color 0.2s; -webkit-appearance: none; border-radius: 0; }
+.form-field input::placeholder, .form-field textarea::placeholder { color: var(--dusk); opacity: 0.45; }
+.form-field input:focus, .form-field textarea:focus, .form-field select:focus { border-color: var(--sand); }
+.form-field textarea { height: 90px; resize: none; }
+.form-field select { cursor: pointer; color: var(--dusk); }
+.form-field select option { background: var(--bark); color: var(--cream); }
+.form-submit { align-self: flex-start; padding: 0.85rem 2.2rem; background: var(--sand); color: var(--bark2); border: none; font-family: var(--f-sans); font-size: 0.65rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; cursor: pointer; transition: background 0.25s; }
+.form-submit:hover { background: var(--moss); color: var(--cream); }
+
+footer { background: var(--bark2); padding: 2.5rem 5vw; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; border-top: 1px solid var(--line); }
+.footer-logo { font-family: var(--f-serif); font-size: 0.9rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--sand); }
+.footer-links { display: flex; gap: 2.5rem; list-style: none; }
+.footer-links a { font-family: var(--f-sans); font-size: 0.65rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dusk); transition: color 0.2s; }
+.footer-links a:hover { color: var(--cream); }
+.footer-copy { font-family: var(--f-sans); font-size: 0.62rem; font-weight: 300; color: var(--dusk); opacity: 0.45; }
+
+@media (max-width: 960px) {
+  .about, .journey-inner, .contact { grid-template-columns: 1fr; gap: 4rem; }
+  .about-image-wrap::after { display: none; }
+  .offerings-grid, .philosophy-pillars, .testimonials-grid { grid-template-columns: 1fr; }
+  .hero-stats { gap: 2rem; }
+  .nav-links, .nav-cta { display: none; }
+}
+@media (max-width: 560px) {
+  nav { padding: 1.2rem 1.5rem; }
+  .hero-inner { padding-top: 9rem; }
+  .about, .offerings, .journey, .philosophy, .testimonials, .contact { padding: 5rem 1.5rem; }
+  footer { padding: 2.5rem 1.5rem; flex-direction: column; align-items: flex-start; }
+  .hero-bottom { flex-direction: column; gap: 1.5rem; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="#" class="nav-logo">Art of Unfolding</a>
+  <ul class="nav-links">
+    <li><a href="#about">Start</a></li>
+    <li><a href="#offerings">Wege</a></li>
+    <li><a href="#philosophy">Philosophie</a></li>
+    <li><a href="#lisa">Lisa</a></li>
+    <li><a href="#contact">Kontakt</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Anfrage stellen</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-rule"></div>
+  <div class="hero-inner">
+    <p class="hero-eyebrow">Yoga · Coaching · Corporate — Münster</p>
+    <h1 class="hero-h1">
+      unroll your mat ·<br>
+      <em>unfold your potential</em>
+    </h1>
+    <p class="hero-claim">
+      Im Außen performen · im Inneren ankommen —<br>
+      für alle, die von innen heraus performen wollen.
+    </p>
+    <div class="hero-actions">
+      <a href="#offerings" class="btn-primary">Entfalte das Potenzial</a>
+      <a href="#offerings" class="btn-ghost">Finde den passenden Weg</a>
+    </div>
+  </div>
+  <div class="hero-bottom">
+    <div class="hero-scroll">Scroll</div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="about-image-wrap">
+    <div class="about-image"><img src="lisa-portrait.jpeg" alt="Lisa Paschedag" style="width:100%; height:100%; object-fit:cover;"></div>
+  </div>
+  <div class="about-text">
+    <p class="label">Worum es geht</p>
+    <h2>Leistung und<br><em>Balance</em></h2>
+    <div class="divider"></div>
+    <p>Du funktionierst. Du lieferst. Du organisierst.</p>
+    <p>Alles läuft. Nach außen. Termine. Verantwortung. Ergebnisse. Und trotzdem fehlt etwas — die Energie, die trägt, und das Gefühl, wirklich da zu sein.</p>
+    <p>Genau hier entsteht oft eine unsichtbare Reibung im Alltag — zwischen äußerer Leistung und innerer Stabilität.</p>
+    <p>Das ist kein Zeichen von Schwäche. Es ist das Ergebnis von Systemen, die auf Output optimiert sind — nicht auf den Menschen dahinter.</p>
+    <div class="quote-block"><p>„feel as good as you perform."</p></div>
+    <p>Ich bin überzeugt, dass sich beides verbindet: Leistung im Außen und Stabilität im Inneren — getragen von einer Praxis, die nicht verändert, wer du bist, sondern wie du im Alltag wirksam bleibst. Art of Unfolding setzt genau dort an.</p>
+    <div class="link-row">
+      <a href="#yoga">Yoga Klassen →</a>
+      <a href="#coaching">1:1 Coaching →</a>
+      <a href="#corporate">Corporate Yoga →</a>
+    </div>
+  </div>
+</section>
+
+<section class="offerings" id="offerings">
+  <div class="offerings-header">
+    <p class="label">Was ich anbiete</p>
+    <h2>Eine Praxis,<br><em>drei Wege</em></h2>
+    <p class="offerings-subclaim">feel as good as you perform — ob auf der Matte, im 1:1 oder mit deinem Team.</p>
+  </div>
+  <div class="offerings-grid">
+    <div class="offering" id="yoga">
+      <div class="offering-nr">01</div>
+      <h3 class="offering-name">Yoga-<br><em>Klassen</em></h3>
+      <p class="offering-desc">Ashtanga & Vinyasa — für Anfänger bis Fortgeschrittene. Öffentlich, privat oder auf Anfrage.</p>
+      <ul class="offering-list">
+        <li>Ashtanga Mysore Style</li>
+        <li>Vinyasa Flow</li>
+        <li>Sanftes Hatha und Yin-Yoga</li>
+        <li>1:1 Stunden</li>
+      </ul>
+      <a href="#contact" class="offering-cta">Anfrage stellen</a>
+    </div>
+    <div class="offering" id="coaching">
+      <div class="offering-nr">02</div>
+      <h3 class="offering-name">1:1<br><em>Coaching</em></h3>
+      <p class="offering-desc">Life Design und innere Klarheit — für Menschen die mehr wollen als Funktionieren. Körperorientiert, tiefgehend, auf dich zugeschnitten.</p>
+      <ul class="offering-list">
+        <li>Life Design & Orientierung</li>
+        <li>Innere Klarheit & Fokus</li>
+        <li>Körperorientierte Methoden</li>
+      </ul>
+      <a href="#contact" class="offering-cta">Erstgespräch buchen</a>
+    </div>
+    <div class="offering" id="corporate">
+      <div class="offering-nr">03</div>
+      <h3 class="offering-name">Corporate<br><em>Yoga</em></h3>
+      <p class="offering-desc">Yoga für Teams — als Einzel-Session, Kurs oder Retreat-Format. On-site in Münster oder remote.</p>
+      <ul class="offering-list">
+        <li>Team-Sessions on-site & online</li>
+        <li>Performance & Fokus Workshops</li>
+        <li>Retreat & Offsite Formate</li>
+      </ul>
+      <a href="#contact" class="offering-cta">Anfrage stellen</a>
+    </div>
+  </div>
+</section>
+
+<section class="journey" id="vorgehen">
+  <div class="journey-inner">
+    <div class="journey-text">
+      <p class="label" style="color:var(--moss);">Mein Ansatz</p>
+      <h2>Zwei Welten —<br><em>eine Haltung</em></h2>
+      <p>Yoga hat mir gegeben was mir Führungskurse und Strategieseminare nicht geben konnten: die Fähigkeit, in schwierigen Momenten präsent zu bleiben. Klarer zu entscheiden. Ruhiger zu kommunizieren.</p>
+      <p style="margin-top:1.2rem;">8 Jahre Yogapraxis parallel zu Führungsrollen haben meinen Alltag verändert — die Art wie ich in Drucksituationen führe, wie ich mit Teams in die Komplexität gehe, wie ich nach einem langen Tag wieder zu mir komme.</p>
+    </div>
+    <div>
+      <div class="journey-intro">Mein Vorgehen: gemeinsam eine Kombination aus Bewegung, Rhythmus und Reflexion entwickeln — die in deinen Alltag passt und langfristig wirkt.</div>
+      <div class="journey-steps">
+        <div class="journey-step">
+          <div>
+            <div class="journey-step-title">Klarheit schaffen beginnt im Verstehen</div>
+            <div class="journey-step-desc">Jede Zusammenarbeit beginnt damit, wirklich zuzuhören — was gerade da ist, was fehlt, was möglich ist. Kein Standardprogramm, kein Einheitsformat.</div>
+          </div>
+        </div>
+        <div class="journey-step">
+          <div>
+            <div class="journey-step-title">Tägliche Praxis, die trägt</div>
+            <div class="journey-step-desc">Gemeinsam entwickeln wir eine Kombination aus Bewegung, Rhythmus und Reflexion — die in deinen Alltag passt und langfristig wirkt.</div>
+          </div>
+        </div>
+        <div class="journey-step">
+          <div>
+            <div class="journey-step-title">Nicht mehr sein — Integration statt Addition</div>
+            <div class="journey-step-desc">Es geht nicht darum, noch etwas obendrauf zu packen. Sondern darum, anders zu sein in dem was schon da ist — im Job, in Beziehungen, im Alltag.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="journey" id="lisa" style="background: var(--bark2); padding-top: 0; padding-bottom: 9rem;">
+  <div style="border-top: 1px solid var(--line); padding-top: 9rem;" class="journey-inner">
+    <div class="journey-text">
+      <p class="label" style="color:var(--moss);">Über mich</p>
+      <h2>Vom Kalender<br>zur Matte —<br><em>und zurück zu mir</em></h2>
+      <p style="font-style: italic; color: var(--moss);">Meine Verbindung zwischen Strukturen und Menschen</p>
+      <p>Mit Erfahrung in verschiedenen Teams und diversen Branchen — als Head of Project Management, IT-Beraterin und Personal Referentin — kenne ich die Realität von Hochleistungsumfeldern. Und ich weiß, wie Yoga diese Realität verändern kann. Nicht als Ausgleich — sondern als Grundlage.</p>
+      <p style="margin-top:1.2rem;">Als 400h-zertifizierte Yogalehrerin weiß ich aus eigener Erfahrung: wer gelernt hat, auf sich zu hören, trifft klarere Entscheidungen, kommuniziert ruhiger und bleibt auch in komplexen Situationen handlungsfähig.</p>
+    </div>
+    <div class="credentials">
+      <div class="credential-row"><span class="credential-text">400h YTT — Ashtanga, Vinyasa, Hatha Yoga</span></div>
+      <div class="credential-row"><span class="credential-text">Goodwill Career Coach & Navigator</span></div>
+      <div class="credential-row"><span class="credential-text">Trainerlizenz C</span></div>
+      <div class="credential-row"><span class="credential-text">3+ Jahre Führungskraft im Projektmanagement</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="philosophy" id="philosophy">
+  <p class="label" style="color:var(--moss);">Philosophie</p>
+  <h2 class="philosophy-claim">feel as good<br><em>as you perform</em></h2>
+  <div class="philosophy-body">
+    <p>Unfolding bedeutet zum Ausdruck zu bringen, was man schon ist — mit mehr Leichtigkeit, mehr Klarheit.</p>
+    <p>Nicht die großen Momente verändern uns — sondern was wir täglich tun. Die Matte ist ein Ort wo Gewohnheiten entstehen, die im Rest des Lebens wirken.</p>
+    <p>Wer gelernt hat, mit sich in Kontakt zu sein, trifft klarere Entscheidungen, bleibt in Drucksituationen handlungsfähig und führt aus einer inneren Stabilität heraus. Das ist das Fundament für nachhaltiges Performen — im Job, in Teams und im eigenen Leben.</p>
+  </div>
+  <div class="philosophy-pillars">
+    <div class="pillar" style="text-align:center;"><div class="pillar-symbol">✦</div><div class="pillar-name">Körper</div><p class="pillar-desc">Der Körper ist ein Medium — für Klarheit, Präsenz und Stärke.</p></div>
+    <div class="pillar" style="text-align:center;"><div class="pillar-symbol">꩜</div><div class="pillar-name">Geist</div><p class="pillar-desc">Mentale Klarheit entsteht, wenn wir aufhören zu kämpfen — und anfangen zuzuhören.</p></div>
+    <div class="pillar" style="text-align:center;"><div class="pillar-symbol" style="display:inline-block; transform: rotate(-90deg);">»</div><div class="pillar-name">Potenzial</div><p class="pillar-desc">Unfolding bedeutet: nicht mehr werden — sondern endlich sein, wer du schon bist.</p></div>
+  </div>
+</section>
+
+<section class="testimonials" id="referenzen">
+  <p class="label">Stimmen</p>
+  <h2>Was andere<br><em>erlebt haben</em></h2>
+  <div class="testimonials-grid">
+    <div class="testimonial"><p class="testimonial-text">„Lisa schafft einen Raum in dem man sich gleichzeitig herausgefordert und getragen fühlt. Nach unserem Kurs hatte ich wieder Zugang zu mir selbst."</p><p class="testimonial-meta">— Sarah K. · Führungskraft · Münster</p></div>
+    <div class="testimonial"><p class="testimonial-text">„Die Corporate Sessions haben unser Team wirklich zusammengebracht. Kein Wellness-Pflichtprogramm — sondern echte Wirkung. Wir buchen wieder."</p><p class="testimonial-meta">— Marcus T. · Team Lead · Tech-Startup</p></div>
+    <div class="testimonial"><p class="testimonial-text">„Im Coaching mit Lisa habe ich Antworten gefunden die ich schon lange gesucht hatte. Ihre Kombination aus Körperarbeit und Tiefe im Gespräch ist einzigartig."</p><p class="testimonial-meta">— Julia M. · Coach & Unternehmerin</p></div>
+    <div class="testimonial"><p class="testimonial-text">„Ich kam wegen Ashtanga — und blieb wegen allem anderen. Lisa unterrichtet mit einer Präzision und Wärme die man selten findet."</p><p class="testimonial-meta">— Tom R. · Ashtanga-Praktizierender</p></div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="contact-info">
+    <p class="label">Kontakt</p>
+    <h2>Lass uns<br><em>anfangen</em></h2>
+    <div class="divider" style="background:var(--sand);"></div>
+    <p>Ob Yoga-Klasse, Coaching-Anfrage oder Corporate-Buchung — schreib mir. Ich melde mich innerhalb von 48 Stunden.</p>
+    <div class="contact-details">
+      <div class="contact-row"><span class="contact-key">Instagram</span><span class="contact-val">@art.of.unfolding</span></div>
+      <div class="contact-row"><span class="contact-key">LinkedIn</span><span class="contact-val">Lisa Paschedag</span></div>
+      <div class="contact-row"><span class="contact-key">Web</span><span class="contact-val">art-of-unfolding.de</span></div>
+      <div class="contact-row"><span class="contact-key">Standort</span><span class="contact-val">Münster, NRW</span></div>
+    </div>
+  </div>
+  <div class="contact-form">
+    <div class="form-field"><label>Name</label><input type="text" placeholder="Dein Name"></div>
+    <div class="form-field"><label>E-Mail</label><input type="email" placeholder="deine@email.de"></div>
+    <div class="form-field"><label>Ich interessiere mich für</label><select><option value="" disabled selected>— Bitte wählen —</option><option>Yoga-Klassen</option><option>1:1 Coaching</option><option>Corporate Yoga</option><option>Sonstiges</option></select></div>
+    <div class="form-field"><label>Nachricht</label><textarea placeholder="Erzähl mir von dir oder deinem Team…"></textarea></div>
+    <button class="form-submit">Nachricht senden</button>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-logo">Art of Unfolding · Lisa</span>
+  <ul class="footer-links">
+    <li><a href="https://instagram.com/art.of.unfolding" target="_blank">Instagram</a></li>
+    <li><a href="https://linkedin.com/in/lisapaschedag" target="_blank">LinkedIn</a></li>
+    <li><a href="#">Impressum</a></li>
+    <li><a href="#">Datenschutz</a></li>
+  </ul>
+  <span class="footer-copy">© 2026 Lisa Paschedag · Art of Unfolding · Münster</span>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 80); }, { passive: true });
+</script>
+</body>
+</html>
